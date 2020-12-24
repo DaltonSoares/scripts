@@ -1,5 +1,24 @@
 #!/bin/bash
+# alterFwk.sh - Deleta do arquivo fwk.properties as linhas com ManageAccess ou ManageServices e insere linha com portalce_ds caso não exista.
+#
+# Site:       https://github.com/DaltonSoares
+# E-mail:     daltonsoares0@gmail.com
+# Autor:      Dalton A Soares
+# Manutenção: Dalton A Soares
+
+#------------------------------------------------------------------------"
+# Histórico: 
+#------------------------------------------------------------------------"
+
+#------------------------------------------------------------------------"
+#   Testado em: GNU bash, versão 5.0.3(1)-release (x86_64-pc-linux-gnu)
+#------------------------------------------------------------------------"
+
+#-------------------------------VARIÁVEIS--------------------------------"
 varDate=`date +%Y%m%d%H%M%S`
+#------------------------------------------------------------------------"
+
+#-------------------------------EXECUÇÃO----------------------------------"
 
 for i in `find $PWD -name "*fwk.properties*" 2>/dev/null | grep -v old`; 
     do
@@ -8,7 +27,7 @@ for i in `find $PWD -name "*fwk.properties*" 2>/dev/null | grep -v old`;
 	echo "|---------------------------------------------------------------------|"
         cd $diretorio        
         cp -p fwk.properties fwk.properties.old_$varDate
-        sed '/ManageAccess/d' fwk.properties >> novo1.properties 
+        sed '/ManageAccess/d' fwk.properties >> novo1.properties #/d - delete, deleta a linha com ManageAccess
         sed '/ManageServices/d' novo1.properties >> novo2.properties
         rm -rf fwk.properties
         rm -rf novo1.properties
@@ -34,3 +53,4 @@ for i in `find $PWD -name "*fwk.properties*" 2>/dev/null | grep -v old`;
 	    echo ""
         fi    
     done
+#------------------------------------------------------------------------"
